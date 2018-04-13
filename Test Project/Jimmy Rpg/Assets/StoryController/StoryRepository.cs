@@ -3,7 +3,12 @@
 namespace Assets.StoryController
 {
     public class StoryRepository : IStoryRepository
-    {
+    { 
+        public StoryRepository()
+        {
+            JsonStory = GetJsonStory();
+        }
+        public JsonStory JsonStory;
         private IList<StoryModel> _stories;
         public IEnumerable<StoryModel> Stories
         {
@@ -27,6 +32,13 @@ namespace Assets.StoryController
                 model
             };
             return _stories;
+        }
+
+        public JsonStory GetJsonStory(string filePath = @"E:\Development\RpgProject\RpgProject\Test Project\Jimmy Rpg\Assets\StoryController\Story - Copy.json")
+        {
+            var json = JsonHelper.GetJsonFromFile(filePath);
+            var model = JsonHelper.JsonToModel<JsonStory>(json);
+            return model;
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Assets.StoryController
     public abstract class ANpc : MonoBehaviour, INpc
     {
         private StoryModel _story;
-        protected Canvas Canvas;
+        private Canvas Canvas;
 
         private void Start()
         {
@@ -22,11 +22,11 @@ namespace Assets.StoryController
             var conversation = Story.Conversations[0].ConversationText;
             var convoOptions = Story.Conversations[0].ConversationOptions;
 
-            texts[texts.Length - 1].text = conversation;
-            //First will be where we place converstion text, the rest will be from btns
-            for (int i = 0; i <= texts.Length - 1; i++)
+            texts[0].text = conversation;
+            //Last will be where we place converstion text, the rest will be from btns
+            for (int i = 1; i <= texts.Length - 1; i++)
             {
-                texts[i].text = convoOptions[i];
+                texts[i].text = convoOptions[i - 1];
             }
         }
 

@@ -1,0 +1,42 @@
+﻿{
+  "definitions": {
+    "conversations": {
+      "description": "Conversation object",
+      "type": "object",
+      "properties": {
+        "conversation_id": {
+          "type": "number",
+          "description": "Conversation unique Identifier"
+        },
+        "conversation_text": {
+          "type": "string",
+          "description": "Text to display from conversation"
+        },
+        "conversation_options": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Conversation options to display"
+          }
+        },
+        "story_lead_id": { "type": [ "number", "null" ] }
+      }
+    }
+  },
+  "description": "Story object",
+  "type": "object",
+  "properties": {
+    "story_id": { "type": "number" },
+    "title": { "type": "string" },
+    "conversations": {
+      "type": "array",
+      "items": {
+        "description": "Conversation object",
+        "type": "object",
+        "properties": {
+          "conversations": { "$ref": "#/definitions/conversations" }
+        }
+      }
+    }
+  }
+}

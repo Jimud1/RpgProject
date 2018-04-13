@@ -1,0 +1,22 @@
+﻿{
+  "story_id": 1,
+  "title": "Test Story",
+  "conversations": [
+    {
+      "conversation_id": 1,
+      "conversation_text": "Hello there this is a test",
+      "conversation_options": [ "One", "Two", "Thee" ]
+    },
+    {
+      "conversation_id": 2,
+      "conversation_text": "Hello there this is a test",
+      "conversation_options": [ "Option One", "Option Two", "Option Thee" ]
+    },
+    {
+      "conversation_id": 3,
+      "conversation_text": "Hello there this is a test 3",
+      "conversation_options": [ "Option One", "Option Two", "Option Thee" ],
+      "story_lead_id": 2
+    }
+  ]
+}

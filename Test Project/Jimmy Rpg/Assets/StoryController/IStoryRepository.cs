@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Assets.RpgTest
+namespace Assets.StoryController
 {
     public interface IStoryRepository 
     {

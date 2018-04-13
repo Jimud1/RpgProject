@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Assets.RpgTest
+namespace Assets.StoryController
 {
     public class StoryRepository : IStoryRepository
     {
@@ -13,9 +13,13 @@ namespace Assets.RpgTest
             }
         }
 
-        public IList<StoryModel> GetStories(string filePath = @"E:\Development\Test Project\Jimmy Rpg\Assets\RpgTest\Story.json")
+        /// <summary>
+        /// Get Stories will fill in our stories if we don't currently have any
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public IList<StoryModel> GetStories(string filePath = @"E:\Development\RpgProject\RpgProject\Test Project\Jimmy Rpg\Assets\StoryController\Story.json")
         {
-            //Why isn't dis workin'?
             var json = JsonHelper.GetJsonFromFile(filePath);
             var model = JsonHelper.JsonToModel<StoryModel>(json);
             _stories = new List<StoryModel>

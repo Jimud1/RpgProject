@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.RpgTest
+namespace Assets.StoryController
 {
     public interface INpc
     {

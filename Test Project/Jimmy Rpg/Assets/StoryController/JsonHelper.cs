@@ -3,7 +3,7 @@ using System;
 using System.IO;
 //using UnityEngine;
 
-namespace Assets.RpgTest
+namespace Assets.StoryController
 {
     public static class JsonHelper 
     {

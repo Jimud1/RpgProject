@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Assets.RpgTest
+namespace Assets.StoryController
 {
     /// <summary>
     /// Story start

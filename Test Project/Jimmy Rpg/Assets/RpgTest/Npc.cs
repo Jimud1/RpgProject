@@ -1,13 +1,9 @@
-﻿using UnityEngine;
+﻿using Assets.StoryController;
 
 namespace Assets.RpgTest
 {
     public class Npc : ANpc
-    {   
-
-        private bool displayGui = false;
-        public Canvas canvas;
-
+    {
         /// <summary>
         /// Id of story for this Npc 
         /// </summary>
@@ -15,16 +11,8 @@ namespace Assets.RpgTest
         {
             get
             {
-                return 1;
+                return RpgStorySettings.NpcOneId;
             }
-        }
-
-        public override void Converse()
-        {
-            if (displayGui)
-                displayGui = false;
-            else
-                displayGui = true;
         }
     }
 }

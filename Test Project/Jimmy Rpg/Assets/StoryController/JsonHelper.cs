@@ -15,12 +15,13 @@ namespace Assets.StoryController
         /// <returns></returns>
         public static T JsonToModel<T>(string json)
         {
+            T model;
             //Ignore null values
             var settings = new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore
             };
-            T model;
+            
             try
             {
                 model = JsonConvert.DeserializeObject<T>(json, settings);

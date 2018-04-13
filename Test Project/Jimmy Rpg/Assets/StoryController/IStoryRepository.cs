@@ -5,6 +5,5 @@ namespace Assets.StoryController
     public interface IStoryRepository 
     {
         IEnumerable<StoryModel> Stories { get; }
-        JsonStory GetJsonStory(string filePath);
     }
 }

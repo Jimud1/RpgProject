@@ -1,11 +1,11 @@
 ﻿using Zenject;
 using Assets.Scripts.Story;
-using Assets.Scripts.NonPlayerCharacter;
+using Assets.Scripts.StoryFlowController;
 using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public class IoC : MonoInstaller
+    public class ContextInstaller : MonoInstaller
     {
         public override void InstallBindings()
         {
@@ -19,7 +19,7 @@ namespace Assets.Scripts
                 .To<StoryService>()
                 .AsSingle().NonLazy();
 
-            Container.BindInterfacesAndSelfTo<Npc>().AsSingle();
+            Container.BindInterfacesAndSelfTo<StoryFlowManager>().AsSingle();
         }
     }
 }

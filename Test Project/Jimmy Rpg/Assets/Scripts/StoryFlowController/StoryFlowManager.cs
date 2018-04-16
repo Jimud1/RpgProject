@@ -5,15 +5,16 @@ using UnityEngine.UI;
 using GoH = Assets.Scripts.Util.GameObjectHelper;
 using Assets.Scripts.Story;
 using Zenject;
-namespace Assets.Scripts.NonPlayerCharacter
+namespace Assets.Scripts.StoryFlowController
 {
-    public class Npc : MonoBehaviour, INpc
+    public class StoryFlowManager : MonoBehaviour, IStoryFlowManager
     {
         private GameObject _canvas;
         private Canvas Canvas;
         private int ConversationChoice = 0;
         public IStoryService _storyService;
         public Sprite BtnSprite;
+        public Button BtnPrefab;
         public int NpcStoryId
         {
             get
@@ -43,7 +44,7 @@ namespace Assets.Scripts.NonPlayerCharacter
                 Canvas.enabled = true;
         }
         private StoryModel _story;
-        public StoryModel Story
+        public StoryModel CurrentStory
         {
             get
             {
@@ -51,7 +52,7 @@ namespace Assets.Scripts.NonPlayerCharacter
             }
         }
 
-        public virtual void OnTriggerStay(Collider col)
+        public void OnTriggerStay(Collider col)
         {
             if (col.gameObject.CompareTag("Player"))
             {
@@ -65,20 +66,20 @@ namespace Assets.Scripts.NonPlayerCharacter
         {
             var wdt = 160;
             var hgt = 30;
-            var conversation = Story.Conversations[ConversationChoice].ConversationText;
+            var conversation = CurrentStory.Conversations[ConversationChoice].ConversationText;
             GoH.AddTextToGameObject(canvas, conversation, 500, 100);
-            var convoOptions = Story.Conversations[ConversationChoice].ConversationOptions;
+            var convoOptions = CurrentStory.Conversations[ConversationChoice].ConversationOptions;
             int count = 0;
             foreach (var option in convoOptions)
             {
                 int nextConvo = 0;
-                if(ConversationChoice <= Story.Conversations.Count())
+                if(ConversationChoice <= CurrentStory.Conversations.Count())
                 {
                     nextConvo = ConversationChoice + 1;
                 }
                 else
                 {
-                    nextConvo = Story.Conversations.Count() - 1;
+                    nextConvo = CurrentStory.Conversations.Count() - 1;
                 }
                 var btn = GoH.CreateBtn(option, nextConvo, canvas, wdt, hgt, BtnSprite);
                 PositionRect(btn, -50 * - (-count));

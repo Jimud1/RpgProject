@@ -4,7 +4,6 @@ namespace Assets.StoryController
 {
     public class StoryRepository : IStoryRepository
     {
-        public JsonStory JsonStory;
         private IList<StoryModel> _stories;
         public IEnumerable<StoryModel> Stories
         {

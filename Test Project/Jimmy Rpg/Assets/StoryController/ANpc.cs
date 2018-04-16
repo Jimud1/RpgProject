@@ -1,35 +1,78 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Linq;
 using UnityEngine.UI;
+using GoH = Assets.StoryController.GameObjectHelper;
 
 namespace Assets.StoryController
 {
     public abstract class ANpc : MonoBehaviour, INpc
     {
-        private StoryModel _story;
+        private GameObject _canvas;
         private Canvas Canvas;
-
+        private int Choice = 0;
         private void Start()
         {
-            Canvas = GameObject.FindGameObjectWithTag("ConversationUi").GetComponent<Canvas>();
-            FillCanvas();
-        }
-
-        private void FillCanvas()
+            _storyService = new StoryService();
+            _canvas = GoH.AddCanvas(500, 100);
+            FillCanvas(_canvas);
+            Canvas = _canvas.GetComponent<Canvas>();
+        }           
+        private void FillCanvas(GameObject canvas)
         {
-            Text[] texts = Canvas.GetComponentsInChildren<Text>();
-
-            var conversation = Story.Conversations[0].ConversationText;
-            var convoOptions = Story.Conversations[0].ConversationOptions;
-
-            texts[0].text = conversation;
-            //Last will be where we place converstion text, the rest will be from btns
-            for (int i = 1; i <= texts.Length - 1; i++)
+            var wdt = 160;
+            var hgt = 30;
+            var conversation = Story.Conversations[Choice].ConversationText;
+            GoH.AddTextToGameObject(canvas, conversation, 500, 100);
+            var convoOptions = Story.Conversations[Choice].ConversationOptions;
+            int count = 0;
+            foreach (var option in convoOptions)
             {
-                texts[i].text = convoOptions[i - 1];
+                int nextConvo = 0;
+                if(Choice <= Story.Conversations.Count())
+                {
+                    nextConvo = Choice + 1;
+                }
+                else
+                {
+                    nextConvo = Story.Conversations.Count() - 1;
+                }
+                var btn = GoH.CreateBtn(option, nextConvo, canvas, wdt, hgt, BtnSprite);
+                PositionRect(btn, -50 * - (-count));
+                var button = btn.GetComponent<Button>();
+                button.onClick.AddListener(ConversationOnClick);
+                count++;
             }
         }
 
+        public void ClearChildren(Transform transform)
+        {
+            foreach (Transform child in transform)
+            {
+                GoH.HideObject(child.gameObject);
+            }
+        }
+
+        private void ConversationOnClick()
+        {  
+            var go = EventSystem.current.currentSelectedGameObject;
+            if (go != null)
+            {
+                int.TryParse(go.name, out Choice);
+                ClearChildren(_canvas.transform);
+                FillCanvas(_canvas);
+            }
+        }
+
+        private void PositionRect(GameObject obj, int y)
+        {
+            GoH.PlaceRect(obj, 0, y, 0);
+        }
+
+        #region Story
+        private IStoryService _storyService;
+        public abstract int NpcStoryId { get; }
+        public abstract Sprite BtnSprite {get;}
         public void Converse()
         {
             if (Canvas.enabled)
@@ -37,30 +80,14 @@ namespace Assets.StoryController
             else
                 Canvas.enabled = true;
         }
-
-        private IStoryRepository _storyRepository;
-        public IStoryRepository StoryRepository
-        {
-            get
-            {
-                return _storyRepository ?? (_storyRepository = new StoryRepository());
-            }
-        }
-
+        private StoryModel _story;
         public StoryModel Story
         {
             get
             {
-                return _story ?? (_story = StoryRepository.Stories.Where(
-                    x => x.StoryId == NpcStoryId).FirstOrDefault());
+                return _story ?? (_story = _storyService.Get(NpcStoryId));
             }
         }
-        public abstract int NpcStoryId { get; }
-
-        /// <summary>
-        /// Control display
-        /// </summary>
-        /// <param name="col"></param>
         public virtual void OnTriggerStay (Collider col)
         {
             if (col.gameObject.CompareTag("Player"))
@@ -69,5 +96,6 @@ namespace Assets.StoryController
                     Converse();
             }
         }
+        #endregion
     }
 }

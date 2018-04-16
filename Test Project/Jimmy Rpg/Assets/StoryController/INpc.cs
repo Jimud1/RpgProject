@@ -9,7 +9,6 @@ namespace Assets.StoryController
         /// </summary>
         void Converse();
         StoryModel Story { get; }
-        IStoryRepository StoryRepository { get; }
         int NpcStoryId { get; }
     }
 }

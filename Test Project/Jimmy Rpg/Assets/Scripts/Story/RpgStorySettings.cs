@@ -2,12 +2,6 @@
 {
     public static class RpgStorySettings
     {
-        public static int NpcOneId
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        //TODO: Create Json model to represent internal settings
     }
 }

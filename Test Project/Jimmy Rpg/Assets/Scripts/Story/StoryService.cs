@@ -23,6 +23,7 @@ namespace Assets.Scripts.Story
             return Get().Where(x => x.StoryId == id).FirstOrDefault();
         }
 
+        #region Not implemented
         public StoryModel Add(StoryModel item)
         {
             throw new NotImplementedException();
@@ -37,5 +38,6 @@ namespace Assets.Scripts.Story
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
 }

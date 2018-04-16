@@ -1,6 +1,7 @@
 ﻿using Zenject;
 using Assets.Scripts.Story;
-using Assets.Scripts.Npc;
+using Assets.Scripts.NonPlayerCharacter;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -8,18 +9,17 @@ namespace Assets.Scripts
     {
         public override void InstallBindings()
         {
+            Debug.Log("Installing Bindings");
+
             Container.Bind<IRepository>()
                 .To<Repository>()
-                .AsSingle();
-
-            Container.Bind<StoryService>().AsSingle().NonLazy();
+                .AsSingle().NonLazy();
 
             Container.Bind<IStoryService>()
                 .To<StoryService>()
-                .AsSingle();
+                .AsSingle().NonLazy();
 
-            Container.Bind<ANpc>().AsSingle();
-            Container.Bind<cNpc>().AsSingle();
+            Container.BindInterfacesAndSelfTo<Npc>().AsSingle();
         }
     }
 }

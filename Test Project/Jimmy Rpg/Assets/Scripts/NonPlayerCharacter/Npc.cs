@@ -5,28 +5,36 @@ using UnityEngine.UI;
 using GoH = Assets.Scripts.Util.GameObjectHelper;
 using Assets.Scripts.Story;
 using Zenject;
-
-namespace Assets.Scripts.Npc
+namespace Assets.Scripts.NonPlayerCharacter
 {
-    /// <summary>
-    /// Needs to be split up into Gui class ands story controller 
-    /// </summary>
-    public abstract class ANpc : MonoBehaviour, INpc
+    public class Npc : MonoBehaviour, INpc
     {
         private GameObject _canvas;
         private Canvas Canvas;
-        private int Choice = 0;
+        private int ConversationChoice = 0;
+        public IStoryService _storyService;
+        public Sprite BtnSprite;
+        public int NpcStoryId
+        {
+            get
+            {
+                return 1;
+            }
+        }
+
+        [Inject]
+        public void Create(IStoryService storyService)
+        {
+            _storyService = storyService;
+        }
+
         private void Start()
         {
-            _storyService = new StoryService(new Repository());
             _canvas = GoH.AddCanvas(500, 100);
             FillCanvas(_canvas);
             Canvas = _canvas.GetComponent<Canvas>();
         }
         #region Story
-        private IStoryService _storyService;
-        public abstract int NpcStoryId { get; }
-        public abstract Sprite BtnSprite { get; }
         public void Converse()
         {
             if (Canvas.enabled)
@@ -42,6 +50,7 @@ namespace Assets.Scripts.Npc
                 return _story ?? (_story = _storyService.Get(NpcStoryId));
             }
         }
+
         public virtual void OnTriggerStay(Collider col)
         {
             if (col.gameObject.CompareTag("Player"))
@@ -52,26 +61,20 @@ namespace Assets.Scripts.Npc
         }
         #endregion
 
-        [Inject]
-        public void Construct(IStoryService storyService)
-        {
-            _storyService = storyService;
-        }
-
         private void FillCanvas(GameObject canvas)
         {
             var wdt = 160;
             var hgt = 30;
-            var conversation = Story.Conversations[Choice].ConversationText;
+            var conversation = Story.Conversations[ConversationChoice].ConversationText;
             GoH.AddTextToGameObject(canvas, conversation, 500, 100);
-            var convoOptions = Story.Conversations[Choice].ConversationOptions;
+            var convoOptions = Story.Conversations[ConversationChoice].ConversationOptions;
             int count = 0;
             foreach (var option in convoOptions)
             {
                 int nextConvo = 0;
-                if(Choice <= Story.Conversations.Count())
+                if(ConversationChoice <= Story.Conversations.Count())
                 {
-                    nextConvo = Choice + 1;
+                    nextConvo = ConversationChoice + 1;
                 }
                 else
                 {
@@ -98,7 +101,7 @@ namespace Assets.Scripts.Npc
             var go = EventSystem.current.currentSelectedGameObject;
             if (go != null)
             {
-                int.TryParse(go.name, out Choice);
+                int.TryParse(go.name, out ConversationChoice);
                 ClearChildren(_canvas.transform);
                 FillCanvas(_canvas);
             }

@@ -56,6 +56,23 @@ namespace Assets.Scripts.Util
             return obj;
         }
 
+        public static Button UpdateBtn(string text, int count,  float width, float height, 
+            Button btn, GameObject parent)
+        {
+            SetParent(parent.transform, btn.transform);
+            var rectTransform = btn.GetComponent<RectTransform>();
+            SetRectTransformXy(rectTransform, width, height);
+            btn.name = count.ToString();
+            var txt = AddTextToGameObject(btn.gameObject, text, width, height);
+            txt.alignment = TextAnchor.MiddleCenter;
+            return btn;
+        }
+
+        public static void SetParent(Transform parent, Transform child)
+        {
+            child.SetParent(parent);
+        }
+
         public static void DestroyObject(GameObject obj)
         {
            GameObject.Destroy(obj);

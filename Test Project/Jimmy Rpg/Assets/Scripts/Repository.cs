@@ -1,7 +1,6 @@
 ﻿using Assets.Scripts.Util;
 using System.Collections.Generic;
 using Assets.Scripts.Story;
-using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -21,7 +20,7 @@ namespace Assets.Scripts
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        public IList<StoryModel> GetStories(string filePath = @"E:\Development\RpgProject\RpgProject\Test Project\Jimmy Rpg\Assets\Scripts\Story\Json\Story - Copy.json")
+        public IList<StoryModel> GetStories(string filePath = @"E:\Development\RpgProject\RpgProject\Test Project\Jimmy Rpg\Assets\Scripts\Story\Json\Story.json")
         {
             var json = JsonHelper.GetJsonFromFile(filePath);
             _stories = JsonHelper.JsonToModel<IList<StoryModel>>(json);

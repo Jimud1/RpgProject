@@ -11,17 +11,10 @@ namespace Assets.Scripts.StoryFlowController
     {
         private GameObject _canvas;
         private Canvas Canvas;
-        private int ConversationChoice = 0;
+        public int ConversationChoice = 0;
         public IStoryService _storyService;
-        public Sprite BtnSprite;
         public Button BtnPrefab;
-        public int NpcStoryId
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        public ConversationModel CurrentConversation;
 
         [Inject]
         public void Create(IStoryService storyService)
@@ -32,8 +25,8 @@ namespace Assets.Scripts.StoryFlowController
         private void Start()
         {
             _canvas = GoH.AddCanvas(500, 100);
-            FillCanvas(_canvas);
             Canvas = _canvas.GetComponent<Canvas>();
+            FillCanvas(_canvas);    
         }
         #region Story
         public void Converse()
@@ -48,54 +41,51 @@ namespace Assets.Scripts.StoryFlowController
         {
             get
             {
-                return _story ?? (_story = _storyService.Get(NpcStoryId));
-            }
-        }
-
-        public void OnTriggerStay(Collider col)
-        {
-            if (col.gameObject.CompareTag("Player"))
-            {
-                if (Input.GetKeyDown(KeyCode.Space))
-                    Converse();
+                //If it's null then get the 1st
+                return _story ?? (_story = _storyService.Get(1));
             }
         }
         #endregion
 
         private void FillCanvas(GameObject canvas)
         {
-            var wdt = 160;
-            var hgt = 30;
+
+            CurrentConversation = CurrentStory.Conversations[ConversationChoice];
             var conversation = CurrentStory.Conversations[ConversationChoice].ConversationText;
             GoH.AddTextToGameObject(canvas, conversation, 500, 100);
+
             var convoOptions = CurrentStory.Conversations[ConversationChoice].ConversationOptions;
-            int count = 0;
+            int btnCount = 0;
+            var maxOption = CurrentStory.Conversations.Count();
+            var nextConversation = ConversationChoice + 1;
+
             foreach (var option in convoOptions)
             {
-                int nextConvo = 0;
-                if(ConversationChoice <= CurrentStory.Conversations.Count())
+                if(nextConversation >= maxOption - 1)
                 {
-                    nextConvo = ConversationChoice + 1;
+                    nextConversation = maxOption - 1;
                 }
-                else
-                {
-                    nextConvo = CurrentStory.Conversations.Count() - 1;
-                }
-                var btn = GoH.CreateBtn(option, nextConvo, canvas, wdt, hgt, BtnSprite);
-                PositionRect(btn, -50 * - (-count));
-                var button = btn.GetComponent<Button>();
-                button.onClick.AddListener(ConversationOnClick);
-                count++;
+                var liveBtn = Instantiate(BtnPrefab);
+                var btn = GoH.UpdateBtn(option, nextConversation, 160, 30, liveBtn, Canvas.gameObject);
+                PositionRect(btn.gameObject, -50 * - (-btnCount));
+                btn.onClick.AddListener(ConversationOnClick);
+                btnCount++;
             }
+
+            if (CurrentConversation.StoryLeadId != null)
+            {
+                Debug.Log("Lead id is " + CurrentConversation.StoryLeadId.ToString());
+                NextStory(CurrentConversation.StoryLeadId);
+            }
+
         }
 
-        public void ClearChildren(Transform transform)
+        private void NextStory(int? nextStory)
         {
-            foreach (Transform child in transform)
-            {
-                GoH.HideObject(child.gameObject);
-            }
+            ConversationChoice = -1;
+            _story = _storyService.Get((int) nextStory);
         }
+
 
         private void ConversationOnClick()
         {  
@@ -105,6 +95,15 @@ namespace Assets.Scripts.StoryFlowController
                 int.TryParse(go.name, out ConversationChoice);
                 ClearChildren(_canvas.transform);
                 FillCanvas(_canvas);
+            }
+        }
+
+
+        public void ClearChildren(Transform transform)
+        {
+            foreach (Transform child in transform)
+            {
+                GoH.HideObject(child.gameObject);
             }
         }
 

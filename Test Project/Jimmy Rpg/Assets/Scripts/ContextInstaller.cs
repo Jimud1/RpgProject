@@ -1,6 +1,7 @@
 ﻿using Zenject;
 using Assets.Scripts.Story;
 using Assets.Scripts.StoryFlowController;
+using Assets.Scripts.PlayerControls;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -18,6 +19,10 @@ namespace Assets.Scripts
             Container.Bind<IStoryService>()
                 .To<StoryService>()
                 .AsSingle().NonLazy();
+
+            Container.Bind<IMoveable>()
+                .To<Moveable>()
+                .AsSingle();
 
             Container.BindInterfacesAndSelfTo<StoryFlowManager>().AsSingle();
         }

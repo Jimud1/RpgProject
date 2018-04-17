@@ -79,6 +79,7 @@ namespace Assets.Scripts.StoryFlowController
             if (CurrentConversation.StoryLeadId != null)
             {
                 Debug.Log("Lead id is " + CurrentConversation.StoryLeadId.ToString());
+                ClearChildren(_canvas.transform);
                 NextStory(CurrentConversation.StoryLeadId);
             }
 
@@ -92,14 +93,14 @@ namespace Assets.Scripts.StoryFlowController
             GetConversation(ConversationChoice);
             isNewStory = true;
         }
-
         private bool isNewStory = false;
         private void ConversationOnClick()
         {  
             if(isNewStory)
             {
                 ClearChildren(_canvas.transform);
-                FillCanvas(_canvas);
+                //I don't want to fill if we are going on to the next story
+                //FillCanvas(_canvas);
                 isNewStory = false;
             }
 

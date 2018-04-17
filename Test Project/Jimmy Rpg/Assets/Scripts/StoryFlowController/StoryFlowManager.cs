@@ -65,10 +65,6 @@ namespace Assets.Scripts.StoryFlowController
 
             foreach (var option in options)
             {
-                if(nextConversation >= maxOption)
-                {
-                    nextConversation = maxOption;
-                }
                 var btn = Instantiate(BtnPrefab);
                 GoH.UpdateBtn(option, nextConversation, 160, 30, btn, Canvas.gameObject);
                 PositionRect(btn.gameObject, -50 * - (-btnCount));
@@ -76,13 +72,18 @@ namespace Assets.Scripts.StoryFlowController
                 btnCount++;
             }
 
+            //if (isNewStory)
+            //{
+                //ClearChildren(_canvas.transform);
+                //isNewStory = false;
+                //return;
+            //}
+
             if (CurrentConversation.StoryLeadId != null)
             {
                 Debug.Log("Lead id is " + CurrentConversation.StoryLeadId.ToString());
-                ClearChildren(_canvas.transform);
                 NextStory(CurrentConversation.StoryLeadId);
             }
-
         }
 
         private void NextStory(int? nextStory)
@@ -93,25 +94,31 @@ namespace Assets.Scripts.StoryFlowController
             GetConversation(ConversationChoice);
             isNewStory = true;
         }
+
         private bool isNewStory = false;
         private void ConversationOnClick()
         {  
-            if(isNewStory)
-            {
-                ClearChildren(_canvas.transform);
-                //I don't want to fill if we are going on to the next story
-                //FillCanvas(_canvas);
-                isNewStory = false;
-            }
-
             var go = EventSystem.current.currentSelectedGameObject;
 
-            if (go != null)
+            if (go != null && !isNewStory)
             {
                 int.TryParse(go.name, out ConversationChoice);
                 GetConversation(ConversationChoice);
                 ClearChildren(_canvas.transform);
                 FillCanvas(_canvas);
+            }
+            else
+            {
+                isNewStory = false;
+                DeleteChildren(_canvas.transform);
+            }
+        }
+
+        public void DeleteChildren(Transform transform)
+        {
+            foreach (Transform child in transform)
+            {
+                GoH.DestroyObject(child.gameObject);
             }
         }
 

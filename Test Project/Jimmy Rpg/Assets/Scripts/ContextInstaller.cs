@@ -3,6 +3,7 @@ using Assets.Scripts.Story;
 using Assets.Scripts.StoryFlowController;
 using Assets.Scripts.PlayerControls;
 using UnityEngine;
+using Assets.Scripts.GameLogic;
 
 namespace Assets.Scripts
 {
@@ -24,7 +25,11 @@ namespace Assets.Scripts
                 .To<Moveable>()
                 .AsSingle();
 
-            Container.BindInterfacesAndSelfTo<StoryFlowManager>().AsSingle();
+            Container.BindInterfacesAndSelfTo<StoryFlowManager>().AsSingle().NonLazy();
+
+            Container.Bind<IInteractable>()
+                .To<Interactable>()
+                .AsTransient();
         }
     }
 }

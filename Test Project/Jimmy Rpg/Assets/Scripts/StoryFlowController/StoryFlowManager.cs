@@ -53,9 +53,8 @@ namespace Assets.Scripts.StoryFlowController
             return CurrentConversation;
         }
 
-        private void FillCanvas(GameObject canvas)
+        public void FillCanvas(GameObject canvas)
         {
-            
             var conversation = CurrentConversation.ConversationText;
             GoH.AddTextToGameObject(canvas, conversation, 500, 100);
             var options = CurrentConversation.ConversationOptions;
@@ -71,13 +70,6 @@ namespace Assets.Scripts.StoryFlowController
                 btn.onClick.AddListener(ConversationOnClick);
                 btnCount++;
             }
-
-            //if (isNewStory)
-            //{
-                //ClearChildren(_canvas.transform);
-                //isNewStory = false;
-                //return;
-            //}
 
             if (CurrentConversation.StoryLeadId != null)
             {

@@ -2,6 +2,7 @@
 {
     public interface IStatistical
     {
+        float Health { get; set; }
         float Strength { get; set; }
         float Dexterity { get; set; }
         float Accuracy { get; set; }

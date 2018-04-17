@@ -29,7 +29,7 @@ namespace Assets.Scripts.StoryFlowController
             _canvas = GoH.AddCanvas(500, 100);
             Canvas = _canvas.GetComponent<Canvas>();
             GetConversation(ConversationChoice);
-            FillCanvas(_canvas);    
+            FillCanvas();    
         }
         #region Story
         private StoryModel _story;
@@ -39,6 +39,15 @@ namespace Assets.Scripts.StoryFlowController
             {
                 //If it's null then get the 1st
                 return _story ?? (_story = _storyService.Get(1));
+            }
+        }
+
+        public bool Conversing
+        {
+            get
+            {
+
+                return (_canvas.transform.childCount > 0);
             }
         }
         #endregion
@@ -53,13 +62,12 @@ namespace Assets.Scripts.StoryFlowController
             return CurrentConversation;
         }
 
-        public void FillCanvas(GameObject canvas)
+        public void FillCanvas()
         {
             var conversation = CurrentConversation.ConversationText;
-            GoH.AddTextToGameObject(canvas, conversation, 500, 100);
+            GoH.AddTextToGameObject(_canvas, conversation, 500, 100);
             var options = CurrentConversation.ConversationOptions;
             int btnCount = 0;
-            var maxOption = CurrentStory.Conversations.Count() - 1;
             var nextConversation = ConversationChoice + 1;
 
             foreach (var option in options)
@@ -81,7 +89,6 @@ namespace Assets.Scripts.StoryFlowController
         private void NextStory(int? nextStory)
         {
             _story = _storyService.Get((int) nextStory);
-            //Reset after use
             ConversationChoice = 0;
             GetConversation(ConversationChoice);
             isNewStory = true;
@@ -97,7 +104,7 @@ namespace Assets.Scripts.StoryFlowController
                 int.TryParse(go.name, out ConversationChoice);
                 GetConversation(ConversationChoice);
                 ClearChildren(_canvas.transform);
-                FillCanvas(_canvas);
+                FillCanvas();
             }
             else
             {

@@ -3,6 +3,7 @@
     public interface ILevelable
     {
         int Level { get; set; }
+
         float Experience { get; set; }
     }
 }

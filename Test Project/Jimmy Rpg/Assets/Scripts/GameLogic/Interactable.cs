@@ -1,13 +1,18 @@
 ﻿using Assets.Scripts.StoryFlowController;
 using UnityEngine;
-using Zenject;
 
 namespace Assets.Scripts.GameLogic
 {
     public class Interactable : MonoBehaviour, IInteractable
     {
-        //IStoryFlowManager _storyFlowManager;
-        //public GameObject Canvas;
+        GameObject SceneManager;
+        StoryFlowManager _flowManager;
+
+        private void Start()
+        {
+            SceneManager = GameObject.FindGameObjectWithTag("Manager");
+            _flowManager = SceneManager.GetComponent<StoryFlowManager>();
+        }
 
         private void OnTriggerStay(Collider other)
         {
@@ -15,15 +20,15 @@ namespace Assets.Scripts.GameLogic
             {
                 Interact();
             }
-
         }
+
         public void Interact()
         {
-            if (Input.GetKey(KeyCode.Space))
+
+            if (Input.GetKeyUp(KeyCode.Space))
             {
-                Debug.Log("Interacting");
-               // Canvas = GameObject.Find("Test");
-               // _storyFlowManager.FillCanvas(Canvas);
+                if (!_flowManager.Conversing)
+                    _flowManager.FillCanvas();
             }
         }
     }

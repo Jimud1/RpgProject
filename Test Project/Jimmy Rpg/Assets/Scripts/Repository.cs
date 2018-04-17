@@ -20,9 +20,9 @@ namespace Assets.Scripts
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        public IList<StoryModel> GetStories(string filePath = @"E:\Development\RpgProject\RpgProject\Test Project\Jimmy Rpg\Assets\Scripts\Story\Json\Story.json")
+        public IList<StoryModel> GetStories()
         {
-            var json = JsonHelper.GetJsonFromFile(filePath);
+            var json = JsonHelper.GetJsonFromFile(GameSettings.StoryJsonFilePath);
             _stories = JsonHelper.JsonToModel<IList<StoryModel>>(json);
             return _stories;
         }

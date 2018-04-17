@@ -1,11 +1,11 @@
 ﻿using Assets.Scripts.Story;
-using UnityEngine;
 
 namespace Assets.Scripts.StoryFlowController
 {
     public interface IStoryFlowManager
     {
+        bool Conversing { get; }
         StoryModel CurrentStory { get; }
-        void FillCanvas(GameObject canvas);
+        void FillCanvas();
     }
 }

@@ -1,6 +1,7 @@
-﻿namespace Assets.Scripts.GameLogic
+﻿using UnityEngine;
+namespace Assets.Scripts.GameLogic
 {
-    public class Statistics : IStatistical
+    public class Statistics : MonoBehaviour,  IStatistical
     {
         public float Strength
         {
@@ -76,16 +77,32 @@
             }
         }
 
-        public float Health
+        private float _maxHp = 100;
+        public float MaxHp
         {
             get
             {
-                throw new System.NotImplementedException();
+                return _maxHp;
             }
 
             set
             {
-                throw new System.NotImplementedException();
+                _maxHp = value;
+            }
+        }
+        private float? _currentHp;
+        public float CurrentHp
+        {
+            get
+            {
+                if (_currentHp == null)
+                    _currentHp = MaxHp;
+
+                return (float) _currentHp;
+            }
+            set
+            {
+                _currentHp = value;
             }
         }
     }

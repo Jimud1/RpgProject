@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.GameLogic
+﻿namespace Assets.Scripts.Items
 {
     public interface IArmour
     {

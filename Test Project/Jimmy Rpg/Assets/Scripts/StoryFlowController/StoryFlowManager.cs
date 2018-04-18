@@ -26,7 +26,7 @@ namespace Assets.Scripts.StoryFlowController
 
         private void Start()
         {
-            _canvas = GoH.AddCanvas(500, 100);
+            _canvas = GoH.AddCanvas("My Canvas", 500, 100);
             Canvas = _canvas.GetComponent<Canvas>();
             GetConversation(ConversationChoice);
             FillCanvas();    

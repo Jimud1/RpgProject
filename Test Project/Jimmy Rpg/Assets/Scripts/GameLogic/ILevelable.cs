@@ -2,8 +2,8 @@
 {
     public interface ILevelable
     {
-        int Level { get; set; }
-
-        float Experience { get; set; }
+        void AddExperience(float exp);
+        void LevelUp();
+        LevelModel Level { get; }
     }
 }

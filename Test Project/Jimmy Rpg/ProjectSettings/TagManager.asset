@@ -8,6 +8,7 @@ TagManager:
   - Manager
   - Canvas
   - ConversationUi
+  - GameBar
   layers:
   - Default
   - TransparentFX

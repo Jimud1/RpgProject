@@ -5,6 +5,7 @@ namespace Assets.Scripts.Util
 {
     public static class GameObjectHelper 
     {
+        private static string[] DoNotDestroyTags = new string[] { "GameBar" };
         /// <summary>
         /// Add text to gameobject, creates object and adds text
         /// component to object then adds to gameObject
@@ -15,7 +16,7 @@ namespace Assets.Scripts.Util
         {
             var obj = CreateObject();
             Text txt = obj.AddComponent<Text>();
-            txt.name = "Test-" + text;
+            txt.name = text;
             txt.text = text;
             txt.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
             txt.color = Color.black;
@@ -23,6 +24,11 @@ namespace Assets.Scripts.Util
             var rectTrans = obj.GetComponent<RectTransform>();
             SetRectTransformXy(rectTrans, width, height);
             return txt;
+        }
+
+        public static void UpdateText(Text element, string text)
+        {
+            element.text = text;
         }
 
         public static void SetRectTransformXy(RectTransform rect, float x, float y)
@@ -72,12 +78,20 @@ namespace Assets.Scripts.Util
 
         public static void DestroyObject(GameObject obj)
         {
-           GameObject.Destroy(obj);
+            foreach (var tag in DoNotDestroyTags)
+            {
+                if (obj.tag != tag)
+                    Object.Destroy(obj);
+            }
         }
 
         public static void HideObject(GameObject obj)
         {
-            obj.SetActive(false);
+            foreach(var tag in DoNotDestroyTags)
+            {
+                if (obj.tag != tag)
+                    obj.SetActive(false);
+            }
         }
 
         /// <summary>
@@ -103,17 +117,27 @@ namespace Assets.Scripts.Util
             return new GameObject();
         }
 
-        public static GameObject AddCanvas(float width, float height)
+        public static GameObject AddCanvas(string name, float width, float height)
         {
-            var obj = CreateObject();
-            obj.name = "Test";
-            var canvas = obj.AddComponent<Canvas>();
-            obj.AddComponent<CanvasScaler>();
-            obj.AddComponent<GraphicRaycaster>();
+            //Check if we already have a Canvas, if not we will create one
+            var canvas = Object.FindObjectOfType<Canvas>();
+
+            if(canvas == null)
+            {
+                var obj = CreateObject();
+                obj.AddComponent<CanvasScaler>();
+                obj.AddComponent<GraphicRaycaster>();
+                canvas = obj.AddComponent<Canvas>();
+            }
+
+            canvas.name = name;
+            //Adjust settings
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            var rectTransform = obj.GetComponent<RectTransform>();
+            canvas.pixelPerfect = true;
+            //Position X Y
+            var rectTransform = canvas.GetComponent<RectTransform>();
             SetRectTransformXy(rectTransform, width, height); 
-            return obj;
+            return canvas.gameObject;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEditor.Events;
+using Assets.Scripts.StoryFlowController;
 
 public enum Weapon{
 	UNARMED = 0,
@@ -21,6 +22,7 @@ public class RPGCharacterControllerFREE : MonoBehaviour{
 	private UnityEngine.AI.NavMeshAgent agent;
 	private float navMeshSpeed;
 	public Transform goal;
+    public StoryFlowManager _storyFlowManager;
 
 	//jumping variables
 	public float gravity = -9.8f;
@@ -103,7 +105,9 @@ public class RPGCharacterControllerFREE : MonoBehaviour{
 		rb = GetComponent<Rigidbody>();
 		agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 		agent.enabled = false;
-	}
+        _storyFlowManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<StoryFlowManager>();
+
+    }
 
 	void Inputs(){
 		inputDashHorizontal = Input.GetAxisRaw("DashHorizontal");
@@ -122,11 +126,29 @@ public class RPGCharacterControllerFREE : MonoBehaviour{
 
 	#endregion
 
+    private bool ConverseCheck()
+    {
+        return _storyFlowManager.Conversing;
+    }
+
 	#region Updates
 
 	void Update(){
-		//make sure there is animator on character
-		if(animator){
+
+        if (ConverseCheck())
+        {
+            canAction = false;
+            canMove = false;
+        } 
+        else 
+        {
+            canMove = true;
+            canAction = false;
+        }
+            
+
+        //make sure there is animator on character
+        if (animator){
 			Inputs();
 			if(canMove && !isDead && !useNavMesh){
 				CameraRelativeMovement();

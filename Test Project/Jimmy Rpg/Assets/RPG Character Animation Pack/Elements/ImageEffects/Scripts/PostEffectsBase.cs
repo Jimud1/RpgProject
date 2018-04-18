@@ -31,8 +31,10 @@ namespace UnityStandardAssets.ImageEffects
             }
             else
 			{
-                m2Create = new Material (s);
-                m2Create.hideFlags = HideFlags.DontSave;
+                m2Create = new Material(s)
+                {
+                    hideFlags = HideFlags.DontSave
+                };
                 if (m2Create)
                     return m2Create;
                 else return null;
@@ -57,8 +59,10 @@ namespace UnityStandardAssets.ImageEffects
             }
             else
 			{
-                m2Create = new Material (s);
-                m2Create.hideFlags = HideFlags.DontSave;
+                m2Create = new Material(s)
+                {
+                    hideFlags = HideFlags.DontSave
+                };
                 if (m2Create)
                     return m2Create;
                 else return null;
@@ -94,7 +98,7 @@ namespace UnityStandardAssets.ImageEffects
             supportHDRTextures = SystemInfo.SupportsRenderTextureFormat(RenderTextureFormat.ARGBHalf);
             supportDX11 = SystemInfo.graphicsShaderLevel >= 50 && SystemInfo.supportsComputeShaders;
 
-            if (!SystemInfo.supportsImageEffects || !SystemInfo.supportsRenderTextures)
+            if (!SystemInfo.supportsImageEffects)
 			{
                 NotSupported ();
                 return false;

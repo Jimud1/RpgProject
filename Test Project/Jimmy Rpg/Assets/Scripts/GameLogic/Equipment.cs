@@ -1,12 +1,15 @@
-﻿namespace Assets.Scripts.GameLogic
+﻿using Assets.Scripts.Items;
+using UnityEngine;
+
+namespace Assets.Scripts.GameLogic
 {
-    public class Equipment
+    public class Equipment : MonoBehaviour 
     {
-        public IWeapon Weapon;
-        public IArmour Armour;
-        public IArmour Gloves;
-        public IArmour Pants;
-        public IArmour Boots;
-        public IArmour Helmet;
+        public IWeapon Weapon { get; set;}
+        public IArmour Armour { get; set; }
+        public IArmour Gloves { get; set; }
+        public IArmour Pants { get; set; }
+        public IArmour Boots { get; set; }
+        public IArmour Helmet { get; set; }
     }
 }

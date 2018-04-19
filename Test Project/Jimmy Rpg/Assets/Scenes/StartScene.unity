@@ -219,7 +219,7 @@ Prefab:
     - target: {fileID: 11400000, guid: b1cc94d26cd016d479aa5b522d88da0a, type: 2}
       propertyPath: target
       value: 
-      objectReference: {fileID: 1429075037}
+      objectReference: {fileID: 1852522663}
     - target: {fileID: 11400000, guid: b1cc94d26cd016d479aa5b522d88da0a, type: 2}
       propertyPath: sceneCamera
       value: 
@@ -378,7 +378,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 766222413}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 563.5, y: 326.5, z: 0}
+  m_LocalPosition: {x: 595.5, y: 326.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1517597637}

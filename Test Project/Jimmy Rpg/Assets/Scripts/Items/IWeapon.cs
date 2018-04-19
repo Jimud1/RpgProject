@@ -1,6 +1,6 @@
 ﻿namespace Assets.Scripts.Items
 {
-    public interface IWeapon
+    public interface IWeapon : IItem
     {
         float Attack { get; }
     }

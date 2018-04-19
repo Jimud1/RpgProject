@@ -1,4 +1,5 @@
-﻿namespace Assets.Scripts.Story
+﻿using Assets.Scripts.Entities;
+namespace Assets.Scripts.Story
 {
     public interface IStoryService : IService<StoryModel> { }
 }

@@ -127,16 +127,19 @@ public class RPGCharacterControllerFREE : MonoBehaviour
 
 	#endregion
 
-    private bool ConverseCheck()
+    public bool Conversing
     {
-        return _storyFlowManager.Conversing;
+        get
+        {
+            return _storyFlowManager.Conversing; 
+        }
     }
 
 	#region Updates
 
 	void Update(){
 
-        if (ConverseCheck())
+        if (Conversing)
         {
             canAction = false;
             canMove = false;

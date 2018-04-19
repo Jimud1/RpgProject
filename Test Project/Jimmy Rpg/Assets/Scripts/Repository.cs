@@ -1,13 +1,13 @@
 ﻿using Assets.Scripts.Util;
 using System.Collections.Generic;
-using Assets.Scripts.Story;
+using Assets.Scripts.Entities;
 using System;
 
 namespace Assets.Scripts
 {
     public class Repository : IRepository
     {
-        private IList<StoryModel> _stories;
+        private IEnumerable<StoryModel> _stories;
         public IEnumerable<StoryModel> Stories
         {
             get
@@ -21,12 +21,12 @@ namespace Assets.Scripts
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        public IList<StoryModel> GetStories()
+        public IEnumerable<StoryModel> GetStories()
         {
             try
             {
                 var json = JsonHelper.GetJsonFromFile(GameSettings.StoryJsonFilePath);
-                _stories = JsonHelper.JsonToModel<IList<StoryModel>>(json);
+                _stories = JsonHelper.JsonToModel<IEnumerable<StoryModel>>(json);
                 return _stories;
             }
             catch(Exception ex)

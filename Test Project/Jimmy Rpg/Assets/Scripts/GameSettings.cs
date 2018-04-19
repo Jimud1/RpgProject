@@ -3,7 +3,7 @@
     public static class GameSettings
     {
         /// <summary>
-        /// Please update me if you ever move the story json file
+        /// This will come from a json file in the future
         /// </summary>
         public static string StoryJsonFilePath
         {

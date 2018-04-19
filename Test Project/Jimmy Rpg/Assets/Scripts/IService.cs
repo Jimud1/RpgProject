@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Scripts.Entities;
+using System.Collections.Generic;
 
 namespace Assets.Scripts
 {
-    public interface IService<T>
+    public interface IService<T> where T: IEntity
     {
         IEnumerable<T> Get();
         T Get(int id);

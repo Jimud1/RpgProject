@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Assets.Scripts.Story;
+using Assets.Scripts.Entities;
 
 namespace Assets.Scripts
 {

@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Story;
+﻿using Assets.Scripts.Entities;
 
 namespace Assets.Scripts.StoryFlowController
 {

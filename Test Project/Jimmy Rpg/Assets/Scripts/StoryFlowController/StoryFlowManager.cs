@@ -6,7 +6,7 @@ using GoH = Assets.Scripts.Util.GameObjectHelper;
 using Assets.Scripts.Story;
 using Zenject;
 using System;
-
+using Assets.Scripts.Entities;
 namespace Assets.Scripts.StoryFlowController
 {
     public class StoryFlowManager : MonoBehaviour, IStoryFlowManager
@@ -46,8 +46,7 @@ namespace Assets.Scripts.StoryFlowController
         {
             get
             {
-
-                return (_canvas.transform.childCount > 0);
+                return (_canvas.transform.childCount > 1);
             }
         }
         #endregion
@@ -55,9 +54,8 @@ namespace Assets.Scripts.StoryFlowController
         private ConversationModel GetConversation(int index)
         {
             //starts at 0
-            if (index < 0) throw new ArgumentOutOfRangeException("Index is below range");
+            if (index < 0 || index > CurrentStory.Conversations.Count() - 1) throw new ArgumentOutOfRangeException("Index out of range");
             if (CurrentConversation == CurrentStory.Conversations[index]) throw new ArgumentException("Getting same conversation");
-            if (index > CurrentStory.Conversations.Count() - 1) throw new ArgumentOutOfRangeException("Index above range");
             CurrentConversation = CurrentStory.Conversations[index];
             return CurrentConversation;
         }
@@ -77,16 +75,24 @@ namespace Assets.Scripts.StoryFlowController
                 var btn = Instantiate(BtnPrefab);
                 GoH.UpdateBtn(option.Key, nextConversation, 160, 30, btn, Canvas.gameObject);
                 PositionRect(btn.gameObject, -50 * - (-btnCount));
-                btn.onClick.AddListener(ConversationOnClick);
+                if(option.Value == null)
+                    btn.onClick.AddListener(ConversationOnClick);
+                else
+                    btn.onClick.AddListener(StoryLeadOnClick);
                 btnCount++;
             }
+        }
 
-            if (CurrentConversation.StoryLeadId != null)
+        private void StoryLeadOnClick()
+        {
+            var go = EventSystem.current.currentSelectedGameObject;
+
+            if (go != null)
             {
-                Debug.Log("Lead id is " + CurrentConversation.StoryLeadId.ToString());
-                //Change this so it goes with choice clicked
-                var choice = CurrentConversation.StoryLeadId.FirstOrDefault();
-                NextStory(choice);
+                int temp;
+                int.TryParse(go.name, out temp);
+                NextStory(temp);
+                DeleteChildren(_canvas.transform);
             }
         }
 
@@ -95,25 +101,18 @@ namespace Assets.Scripts.StoryFlowController
             _story = _storyService.Get((int) nextStory);
             ConversationChoice = 0;
             GetConversation(ConversationChoice);
-            isNewStory = true;
         }
 
-        private bool isNewStory = false;
         private void ConversationOnClick()
         {  
             var go = EventSystem.current.currentSelectedGameObject;
 
-            if (go != null && !isNewStory)
+            if (go != null)
             {
                 int.TryParse(go.name, out ConversationChoice);
                 GetConversation(ConversationChoice);
                 ClearChildren(_canvas.transform);
                 FillCanvas();
-            }
-            else
-            {
-                isNewStory = false;
-                DeleteChildren(_canvas.transform);
             }
         }
 

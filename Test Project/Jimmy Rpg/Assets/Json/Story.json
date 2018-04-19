@@ -6,18 +6,18 @@
       {
         "conversation_id": 1,
         "conversation_text": "Wake up young man, it's time to leave!",
-        "conversation_options": [ "What's going on?", "You leave!", "Let's go" ]
+        "conversation_options": { "What's going on?" : null , "You leave!": null , "Let's go": null } 
       },
       {
         "conversation_id": 2,
         "conversation_text": "There's no time for that, we're going, we're under attack",
-        "conversation_options": [ "Let's go then", "We must do something!"]
+        "conversation_options": { "Let's go then": null , "We must do something!": null } 
       },
       {
         "conversation_id": 3,
         "conversation_text": "Go over to the box and get the Armour and sword",
-        "conversation_options": [ "Ok then" ],
-        "story_lead_id": 2
+        "conversation_options": { "Ok then" : 2 } ,
+        "story_lead_id": [ 2 ]
       }
     ]
   },
@@ -28,60 +28,75 @@
       {
         "conversation_id": 1,
         "conversation_text": "Great work, now let's head out",
-        "conversation_options": [ "But what's going on exactly?", "Who's attacking us?", "Who are you?" ]
+        "conversation_options": { "But what's going on exactly?": null, "Who's attacking us?": null, "Who are you?": null }
       },
       {
         "conversation_id": 2,
         "conversation_text": "There will be time for all of that later.",
-        "conversation_options": [ "But I must know", "Ok" ]
+        "conversation_options": { "But I must know": null, "Ok": null }
       },
       {
         "conversation_id": 3,
         "conversation_text": "Come on we must fight our way out of this situation",
-        "conversation_options": [ "But I don't know how to fight", "About time!" ],
-        "story_lead_id": 3
+        "conversation_options": { "But I don't know how to fight": 3, "About time!": 3 },
+        "story_lead_id": [ 3 ]
       }
     ]
   },
   {
     "story_id": 3,
-    "title": "Test Story 3",
+    "title": "Fight with bandits",
+    "conversations": 
+	[{
+        "conversation_id": 1,
+        "conversation_text": "Hey there boy, give me that sword!",
+        "conversation_options": { "Gladly": null }
+    }]
+  },
+  {
+    "story_id": 4,
+    "title": "Big boss fight",
     "conversations": [
       {
         "conversation_id": 1,
-        "conversation_text": "Hello there this is a test 2",
-        "conversation_options": [ "One", "Two", "The 2 e" ]
+        "conversation_text": "He has the necklace, get that boy!",
+        "conversation_options": { "Who, me?": null, "Do one": null, "Let's go!": null }
       },
       {
         "conversation_id": 2,
-        "conversation_text": "Hello there this is a test",
-        "conversation_options": [ "Option One", "Option Two", "Option Thee" ]
-      },
-      {
-        "conversation_id": 3,
-        "conversation_text": "Hello there this is a test 3",
-        "conversation_options": [ "Option One", "Option Two", "Option Thee" ]
+        "conversation_text": "Give me the necklace or I'll take it from your dead hands",
+        "conversation_options": { "I could, or I could just kill you": 5, "You can't have it": 5, "Here, just take it and leave": 6 },
+		"story_lead_id": [ 5, 6 ] 
       }
     ]
-  },{
-    "story_id": 4,
-    "title": "Test Story",
+  },
+    {
+    "story_id": 5,
+    "title": "Fight with boss",
+    "conversations": 
+	[
+      {
+        "conversation_id": 1,
+        "conversation_text": "Time to die...",
+        "conversation_options": { "Let's go": 7 },
+		"story_lead_id": [ 7 ]
+      }
+    ]
+  },
+  {
+    "story_id": 6,
+    "title": "Avoiding fight",
     "conversations": [
       {
         "conversation_id": 1,
-        "conversation_text": "This is a test for a simple rpg story system ",
-        "conversation_options": [ "One load of stuff", "Two retard", "Thee das" ]
+        "conversation_text": "Faggot option but we will still fight at some point, when I'll be stronger",
+        "conversation_options": { "Damnit": null, "Can we still fight?": null }
       },
       {
         "conversation_id": 2,
-        "conversation_text": "I would like to know how well this works and how much more effort is needed",
-        "conversation_options": [ "I could", "Get someone to start", "writing up a story" ]
-      },
-      {
-        "conversation_id": 3,
-        "conversation_text": "This is my third and last conversation of story one",
-        "conversation_options": [ "Should load 2nd story", "does it load before it shows this?", "probably, maybe not?" ],
-        "story_lead_id": 2
+        "conversation_text": "Goodbye young one",
+        "conversation_options": { "But...": null },
+        "story_lead_id": [ 7 ]
       }
     ]
   }

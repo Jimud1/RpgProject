@@ -8,7 +8,8 @@ public enum Weapon{
 	RELAX = 8
 }
 
-public class RPGCharacterControllerFREE : MonoBehaviour{
+public class RPGCharacterControllerFREE : MonoBehaviour
+{
 	#region Variables
 
 	//Components

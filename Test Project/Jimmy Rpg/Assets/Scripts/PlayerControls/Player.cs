@@ -10,6 +10,13 @@ namespace Assets.Scripts.PlayerControls
         Statistics PlayerStats;
         Equipment EquippedEquipment;
         Levelable CurrentLevel;
+        public bool IsDead
+        {
+            get
+            {
+                return PlayerStats.CurrentHp > 0;
+            }
+        }
         #endregion
 
         /// <summary>

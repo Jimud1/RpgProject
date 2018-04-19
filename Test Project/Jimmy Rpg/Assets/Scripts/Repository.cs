@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Util;
 using System.Collections.Generic;
 using Assets.Scripts.Story;
+using System;
 
 namespace Assets.Scripts
 {
@@ -22,9 +23,16 @@ namespace Assets.Scripts
         /// <returns></returns>
         public IList<StoryModel> GetStories()
         {
-            var json = JsonHelper.GetJsonFromFile(GameSettings.StoryJsonFilePath);
-            _stories = JsonHelper.JsonToModel<IList<StoryModel>>(json);
-            return _stories;
+            try
+            {
+                var json = JsonHelper.GetJsonFromFile(GameSettings.StoryJsonFilePath);
+                _stories = JsonHelper.JsonToModel<IList<StoryModel>>(json);
+                return _stories;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error occured Getting stories", ex);
+            }
         }
     }
 }

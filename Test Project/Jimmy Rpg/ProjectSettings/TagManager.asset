@@ -9,6 +9,7 @@ TagManager:
   - Canvas
   - ConversationUi
   - GameBar
+  - PlayerHp
   layers:
   - Default
   - TransparentFX

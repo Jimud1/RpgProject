@@ -72,8 +72,10 @@ namespace Assets.Scripts.StoryFlowController
 
             foreach (var option in options)
             {
+                if (option.Value != null)
+                    nextConversation = (int)option.Value;
                 var btn = Instantiate(BtnPrefab);
-                GoH.UpdateBtn(option, nextConversation, 160, 30, btn, Canvas.gameObject);
+                GoH.UpdateBtn(option.Key, nextConversation, 160, 30, btn, Canvas.gameObject);
                 PositionRect(btn.gameObject, -50 * - (-btnCount));
                 btn.onClick.AddListener(ConversationOnClick);
                 btnCount++;
@@ -82,7 +84,9 @@ namespace Assets.Scripts.StoryFlowController
             if (CurrentConversation.StoryLeadId != null)
             {
                 Debug.Log("Lead id is " + CurrentConversation.StoryLeadId.ToString());
-                NextStory(CurrentConversation.StoryLeadId);
+                //Change this so it goes with choice clicked
+                var choice = CurrentConversation.StoryLeadId.FirstOrDefault();
+                NextStory(choice);
             }
         }
 

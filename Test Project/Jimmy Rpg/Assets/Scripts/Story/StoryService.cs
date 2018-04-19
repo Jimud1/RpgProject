@@ -6,16 +6,16 @@ namespace Assets.Scripts.Story
 {
     public class StoryService : IStoryService
     {
-        IRepository _storyRepo;
+        IRepository _repository;
 
-        public StoryService(IRepository storyRepo)
+        public StoryService(IRepository repository)
         {
-            _storyRepo = storyRepo;
+            _repository = repository;
         }
 
         public IEnumerable<StoryModel> Get()
         {
-            return _storyRepo.Stories;
+            return _repository.Stories;
         }
 
         public StoryModel Get(int id)

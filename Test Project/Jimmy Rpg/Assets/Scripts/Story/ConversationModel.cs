@@ -17,10 +17,9 @@ namespace Assets.Scripts.Story
         public string ConversationText { get; set; }
 
         [JsonProperty("conversation_options")]
-        public IList<string> ConversationOptions { get; set; }
-
+        public IDictionary<string, int?> ConversationOptions { get; set; }
         [JsonProperty("story_lead_id")]
-        public int? StoryLeadId { get; set; }
+        public IEnumerable<int?> StoryLeadId { get; set; }
     }
 }
 

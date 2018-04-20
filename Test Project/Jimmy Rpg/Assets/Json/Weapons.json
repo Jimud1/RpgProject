@@ -3,6 +3,7 @@
     "item_id": 1,
     "attack" : 3,
     "item_name": "Noob sword",
+    "item_description": "Sword for noobs",
     "item_value" : 10
   }
 ]

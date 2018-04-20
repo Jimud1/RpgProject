@@ -2,6 +2,6 @@
 {
     public interface IArmour : IItem
     {
-        float Defense { get; }
+        float Defense { get; set; }
     }
 }

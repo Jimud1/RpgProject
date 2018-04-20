@@ -55,6 +55,38 @@ namespace Assets.Scripts.Data.Entities
         private IEnumerable<QuestModel> _quests;
         #endregion
 
+        #region Armour
+        public IEnumerable<ArmourModel> Armours
+        {
+            get
+            {
+                return _armours ?? (_armours = GetArmours());
+            }
+        }
+
+        public IEnumerable<ArmourModel> _armours;
+        #endregion
+
+        #region Get Armours
+        /// <summary>
+        /// Get armour from Json
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ArmourModel> GetArmours()
+        {
+            try
+            {
+                var json = JsonHelper.GetJsonFromFile(GameSettings.ArmoursJsonPath);
+                _armours = JsonHelper.JsonToModel<IEnumerable<ArmourModel>>(json);
+                return _armours;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error occured getting armours from json", ex);
+            }
+        }
+        #endregion
+
         #region Get Quests from json 
         private IEnumerable<QuestModel> GetQuests()
         {

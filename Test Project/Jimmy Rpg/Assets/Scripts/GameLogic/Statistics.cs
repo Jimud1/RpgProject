@@ -5,105 +5,41 @@ namespace Assets.Scripts.GameLogic
     {
         public float Strength
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-                throw new System.NotImplementedException();
-            }
+            get; set;
         }
 
         public float Dexterity
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-                throw new System.NotImplementedException();
-            }
+            get; set;
         }
         public float Accuracy
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-                throw new System.NotImplementedException();
-            }
+            get;
+            set;
         }
         public float Constitution
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-                throw new System.NotImplementedException();
-            }
+            get;
+            set;
         }
         public float Intelligence
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-                throw new System.NotImplementedException();
-            }
+            get;
+            set;
         }
         public float Wisdom
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-                throw new System.NotImplementedException();
-            }
+            get;set;
         }
-
-        private float _maxHp = 100;
         public float MaxHp
         {
-            get
-            {
-                return _maxHp;
-            }
-
-            set
-            {
-                _maxHp = value;
-            }
+            get;
+            set;
         }
-        private float? _currentHp;
         public float CurrentHp
         {
-            get
-            {
-                if (_currentHp == null)
-                    _currentHp = MaxHp;
-
-                return (float) _currentHp;
-            }
-            set
-            {
-                _currentHp = value;
-            }
+            get;
+            set;
         }
     }
 }

@@ -4,6 +4,7 @@
     {
         int ItemId { get; set; }
         string ItemName { get; set; }
+        string ItemDescription { get; set; }
         decimal ItemValue { get; set; }
     }
 }

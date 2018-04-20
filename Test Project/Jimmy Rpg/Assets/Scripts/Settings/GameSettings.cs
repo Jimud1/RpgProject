@@ -19,6 +19,14 @@ namespace Assets.Scripts.Settings
             }
         }
 
+        public static string ArmoursJsonPath
+        {
+            get
+            {
+                return @"E:\Development\RpgProject\RpgProject\Test Project\Jimmy Rpg\Assets\Json\Armour.json";
+            }
+        }
+
         public static string QuestsJsonPath
         {
             get

@@ -1,0 +1,9 @@
+﻿[
+	{
+    "item_id": 1,
+    "item_name": "Noob Armour",
+    "item_description": "Armour for a noob",
+    "item_value":  10,
+		"defense": 5
+	}
+]

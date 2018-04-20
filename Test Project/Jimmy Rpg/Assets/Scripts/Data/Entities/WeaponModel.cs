@@ -8,6 +8,8 @@ namespace Assets.Scripts.Data.Entities
         public float Attack { get; set; }
         [JsonProperty("item_name")]
         public string ItemName { get; set; }
+        [JsonProperty("item_description")]
+        public string ItemDescription { get; set; }
         [JsonProperty("item_value")]
         public decimal ItemValue { get; set; }     
     }

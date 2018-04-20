@@ -1,0 +1,1 @@
+﻿namespace Assets.Scripts.Data.Entities {public interface IEntity{}}

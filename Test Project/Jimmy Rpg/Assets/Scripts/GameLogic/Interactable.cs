@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.StoryFlowController;
+﻿using Assets.Scripts.DataControllers;
 using UnityEngine;
 
 namespace Assets.Scripts.GameLogic
@@ -6,12 +6,12 @@ namespace Assets.Scripts.GameLogic
     public class Interactable : MonoBehaviour, IInteractable
     {
         GameObject SceneManager;
-        StoryFlowManager _flowManager;
+        StoryController _flowManager;
 
         private void Start()
         {
             SceneManager = GameObject.FindGameObjectWithTag("Manager");
-            _flowManager = SceneManager.GetComponent<StoryFlowManager>();
+            _flowManager = SceneManager.GetComponent<StoryController>();
         }
 
         private void OnTriggerStay(Collider other)

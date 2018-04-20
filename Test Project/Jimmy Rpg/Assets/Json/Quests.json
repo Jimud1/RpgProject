@@ -2,6 +2,8 @@
   {
     "quest_id": 1,
     "completed": false,
-    "quest_description":  "This is a test Quest, please complete me"
+    "quest_title": "Test Quest",
+    "quest_description": "This is a test Quest, please complete me",
+    "quest_type" : 1
   }
 ]

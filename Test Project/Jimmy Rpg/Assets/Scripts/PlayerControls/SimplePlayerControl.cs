@@ -1,15 +1,15 @@
-﻿using Assets.Scripts.StoryFlowController;
+﻿using Assets.Scripts.DataControllers;
 using UnityEngine;
 namespace Assets.Scripts.PlayerControls
 {
     public class SimplePlayerControl: MonoBehaviour, IPlayerControllable
     {
-        StoryFlowManager _flowManager;
+        StoryController _flowManager;
         GameObject SceneManager;
         private void Start()
         {
             SceneManager = GameObject.FindGameObjectWithTag("Manager");
-            _flowManager = SceneManager.GetComponent<StoryFlowManager>();
+            _flowManager = SceneManager.GetComponent<StoryController>();
         }
         public void Move()
         {

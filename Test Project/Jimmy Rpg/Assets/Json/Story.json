@@ -6,18 +6,25 @@
       {
         "conversation_id": 1,
         "conversation_text": "Wake up young man, it's time to leave!",
-        "conversation_options": { "What's going on?" : null , "You leave!": null , "Let's go": null } 
+        "conversation_options": {
+          "What's going on?": null,
+          "You leave!": null,
+          "Let's go": null
+        }
       },
       {
         "conversation_id": 2,
         "conversation_text": "There's no time for that, we're going, we're under attack",
-        "conversation_options": { "Let's go then": null , "We must do something!": null } 
+        "conversation_options": {
+          "Let's go then": null,
+          "We must do something!": null
+        }
       },
       {
         "conversation_id": 3,
         "conversation_text": "Go over to the box and get the Armour and sword",
-        "conversation_options": { "Ok then" : 2 } ,
-        "story_lead_id": [ 2 ]
+        "conversation_options": { "Ok then": 2 },
+        "quest_concerning": 2
       }
     ]
   },
@@ -28,30 +35,42 @@
       {
         "conversation_id": 1,
         "conversation_text": "Great work, now let's head out",
-        "conversation_options": { "But what's going on exactly?": null, "Who's attacking us?": null, "Who are you?": null }
+        "conversation_options": {
+          "But what's going on exactly?": null,
+          "Who's attacking us?": null,
+          "Who are you?": null
+        }
       },
       {
         "conversation_id": 2,
         "conversation_text": "There will be time for all of that later.",
-        "conversation_options": { "But I must know": null, "Ok": null }
+        "conversation_options": {
+          "But I must know": null,
+          "Ok": null
+        }
       },
       {
         "conversation_id": 3,
         "conversation_text": "Come on we must fight our way out of this situation",
-        "conversation_options": { "But I don't know how to fight": 3, "About time!": 3 },
-        "story_lead_id": [ 3 ]
+        "conversation_options": {
+          "But I don't know how to fight": 3,
+          "About time!": 3
+        },
+        "quest_concerning": 3
       }
     ]
   },
   {
     "story_id": 3,
     "title": "Fight with bandits",
-    "conversations": 
-	[{
+    "conversations": [
+      {
         "conversation_id": 1,
         "conversation_text": "Hey there boy, give me that sword!",
-        "conversation_options": { "Gladly": null }
-    }]
+        "conversation_options": { "Gladly": 4 },
+        "quest_concerning": 4
+      }
+    ]
   },
   {
     "story_id": 4,
@@ -60,26 +79,33 @@
       {
         "conversation_id": 1,
         "conversation_text": "He has the necklace, get that boy!",
-        "conversation_options": { "Who, me?": null, "Do one": null, "Let's go!": null }
+        "conversation_options": {
+          "Who, me?": null,
+          "Do one": null,
+          "Let's go!": null
+        }
       },
       {
         "conversation_id": 2,
         "conversation_text": "Give me the necklace or I'll take it from your dead hands",
-        "conversation_options": { "I could, or I could just kill you": 5, "You can't have it": 5, "Here, just take it and leave": 6 },
-		"story_lead_id": [ 5, 6 ] 
+        "conversation_options": {
+          "I could, or I could just kill you": 5,
+          "You can't have it": 5,
+          "Here, just take it and leave": 6
+        },
+        "quest_concerning": 5
       }
     ]
   },
-    {
+  {
     "story_id": 5,
     "title": "Fight with boss",
-    "conversations": 
-	[
+    "conversations": [
       {
         "conversation_id": 1,
         "conversation_text": "Time to die...",
         "conversation_options": { "Let's go": 7 },
-		"story_lead_id": [ 7 ]
+        "quest_concerning": 6
       }
     ]
   },
@@ -90,13 +116,16 @@
       {
         "conversation_id": 1,
         "conversation_text": "Faggot option but we will still fight at some point, when I'll be stronger",
-        "conversation_options": { "Damnit": null, "Can we still fight?": null }
+        "conversation_options": {
+          "Damnit": null,
+          "Can we still fight?": null
+        }
       },
       {
         "conversation_id": 2,
         "conversation_text": "Goodbye young one",
-        "conversation_options": { "But...": null },
-        "story_lead_id": [ 7 ]
+        "conversation_options": { "But...": 7 },
+        "quest_concerning": 7
       }
     ]
   }

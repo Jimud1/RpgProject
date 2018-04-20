@@ -1,6 +1,7 @@
 ﻿using Zenject;
-using Assets.Scripts.Story;
-using Assets.Scripts.StoryFlowController;
+using Assets.Scripts.Data;
+using Assets.Scripts.DataControllers;
+using Assets.Scripts.Services;
 
 namespace Assets.Scripts
 {
@@ -16,7 +17,11 @@ namespace Assets.Scripts
                 .To<StoryService>()
                 .AsSingle().NonLazy();
 
-            Container.BindInterfacesAndSelfTo<StoryFlowManager>().AsSingle();
+            Container.Bind<IWeaponService>()
+                .To<WeaponService>()
+                .AsSingle();
+
+            Container.BindInterfacesAndSelfTo<StoryController>().AsSingle();
 
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Assets.Scripts.GameLogic.Enums;
 
 namespace Assets.Scripts.Data.Entities
 {
@@ -14,11 +15,5 @@ namespace Assets.Scripts.Data.Entities
         public string QuestDescription { get; set; }
         [JsonProperty("quest_type")]
         public QuestType QuestType { get; set; }
-    }
-
-    public enum QuestType
-    {
-        None = 0,
-        EquipEquipment = 1
     }
 }

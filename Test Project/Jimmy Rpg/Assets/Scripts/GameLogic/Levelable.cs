@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.GameLogic
 {
-    public class Levelable : MonoBehaviour, ILevelable
+    public class Levelable : ILevelable
     {
         private LevelModel _level;
         public LevelModel Level

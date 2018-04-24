@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System.Collections;
 using Assets.Scripts.Services;
 using Assets.Scripts.Data;
+using Assets.Scripts.Services.Monster;
 
 public class ServiceTests
 {
@@ -10,6 +11,7 @@ public class ServiceTests
     public IWeaponService _weaponService;
     public IQuestService _questService;
     public IArmourService _armourService;
+    public IMonsterService _monsterService;
     public ServiceTests()
     {
         var repo = new Repository();
@@ -17,6 +19,7 @@ public class ServiceTests
         _weaponService = new WeaponService(repo);
         _questService = new QuestService(repo);
         _armourService = new ArmourService(repo);
+        _monsterService = new MonsterService(repo);
     }
 
     [Test]
@@ -49,6 +52,13 @@ public class ServiceTests
         var test = _weaponService.Get(1);
 
         Assert.AreEqual(3, test.Attack);
+    }
+
+    [Test]
+    public void TestMonsterGet()
+    {
+        var test = _monsterService.Get(1);
+        Assert.AreEqual(5, test.Statistics.Strength);
     }
 
 	// A UnityTest behaves like a coroutine in PlayMode

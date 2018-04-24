@@ -1,0 +1,12 @@
+[
+  {
+    "monster_id": 1,
+    "monster_name": "Noob test mob",
+    "monster_description": "Test monster",
+    "statistics": {
+      "strength": 5,
+      "max_hp": 50
+    },
+    "monster_prefab": "Assets/Prefabs/SKELETON.prefab"
+  }
+]

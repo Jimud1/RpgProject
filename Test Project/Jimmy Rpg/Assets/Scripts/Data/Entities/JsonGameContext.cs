@@ -67,6 +67,37 @@ namespace Assets.Scripts.Data.Entities
         public IEnumerable<ArmourModel> _armours;
         #endregion
 
+        #region Monsters
+        private IEnumerable<MonsterEntity> _monsters;
+        public IEnumerable<MonsterEntity> Monsters
+        {
+            get
+            {
+                return _monsters ?? (_monsters = GetMonsters());
+            }
+        }
+        #endregion
+
+        #region Get Monsters
+        /// <summary>
+        /// Get armour from Json
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<MonsterEntity> GetMonsters()
+        {
+            try
+            {
+                var json = JsonHelper.GetJsonFromFile(GameSettings.MonstersJsonPath);
+                _monsters = JsonHelper.JsonToModel<IEnumerable<MonsterEntity>>(json);
+                return _monsters;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error occured getting armours from json", ex);
+            }
+        }
+        #endregion
+
         #region Get Armours
         /// <summary>
         /// Get armour from Json

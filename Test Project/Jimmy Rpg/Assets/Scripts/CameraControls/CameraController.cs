@@ -13,15 +13,12 @@ namespace Assets.Scripts.CameraControls
         Vector3 offset;
         bool following = true;
         Vector3 lastPosition;
-
-        void Start()
+        private void Start()
         {
             cameraTarget = GameObject.FindGameObjectWithTag("Player");
-            lastPosition = new Vector3(cameraTarget.transform.position.x, cameraTarget.transform.position.y + offsetHeight, cameraTarget.transform.position.z - offsetDistance);
-            offset = new Vector3(cameraTarget.transform.position.x, cameraTarget.transform.position.y + offsetHeight, cameraTarget.transform.position.z - offsetDistance);
         }
 
-        void Update()
+        void FixedUpdate()
         {
             if (Input.GetKey(KeyCode.F))
             {
@@ -64,6 +61,7 @@ namespace Assets.Scripts.CameraControls
         void LateUpdate()
         {
             lastPosition = transform.position;
+            offset = new Vector3(cameraTarget.transform.position.x, cameraTarget.transform.position.y + offsetHeight, cameraTarget.transform.position.z - offsetDistance);
         }
     }
 }

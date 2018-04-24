@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.GameLogic
 {
-    public class Equipment : MonoBehaviour 
+    public class Equipment
     {
         public IWeapon Weapon { get; set;}
         public IArmour Armour { get; set; }

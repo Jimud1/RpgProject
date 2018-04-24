@@ -9,8 +9,16 @@ namespace Assets.Scripts.Settings
     public static class GameSettings 
     {
         /// <summary>
-        /// This will come from a json file in the future
+        /// Monster Json File Path
         /// </summary>
+        public static string MonstersJsonPath
+        {
+            get
+            {
+                return @"E:\Development\RpgProject\RpgProject\Test Project\Jimmy Rpg\Assets\Json\Monster.json";
+            }
+        }
+
         public static string StoryJsonFilePath
         {
             get

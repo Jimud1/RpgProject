@@ -297,8 +297,8 @@ InputManager:
     m_Name: DashHorizontal
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 9
+    negativeButton: q
+    positiveButton: e
     altNegativeButton: 
     altPositiveButton: joystick button 1
     gravity: 1000
@@ -313,8 +313,8 @@ InputManager:
     m_Name: DashVertical
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 8
+    negativeButton: 2
+    positiveButton: x
     altNegativeButton: 
     altPositiveButton: joystick button 1
     gravity: 1000
@@ -361,7 +361,7 @@ InputManager:
     m_Name: TargetBlock
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
+    negativeButton: space
     positiveButton: space
     altNegativeButton: 
     altPositiveButton: joystick button 1
